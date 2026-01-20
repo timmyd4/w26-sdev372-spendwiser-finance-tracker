@@ -1,6 +1,6 @@
 USE spendwiser;
 
-DROP TABLE IF EXISTS expenses;
+CREATE TABLE IF NOT EXISTS expenses;
 
 CREATE TABLE expenses (
   id INT AUTO_INCREMENT PRIMARY KEY,

@@ -117,15 +117,13 @@ export default function DashboardForm(){
 
     <div>
         {expenses.map((e) => (
-          <div key={e.id} style={{ marginBottom: "8px" }}>
+          <div key={e.id}>
             <strong>{e.hobby}</strong> — ${e.amount}  
             <div>{e.description}</div>
             <small>{e.expense_date}</small>
           </div>
         ))}
     </div>            
-
-
     </div>
     )
 }
