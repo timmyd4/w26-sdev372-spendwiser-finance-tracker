@@ -32,5 +32,12 @@
 ## Wireframe
 ![WireFrame-Picture](WireFrame.png)
 
+# MVP for Sprint 2 Deliverable
 
+- Add ability to upload images
+    - may need to update table for db
+    - may need to find additional libaries for adding 
 
+- Add description on side bar within finance history
+    - may need to manipulate css
+    - may need to add logic for appending data to div
