@@ -2,7 +2,9 @@
   "name": "spendwiser-backend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "ts-node Server/index.ts"
+    "dev": "ts-node Server/index.ts",
+    "db:schema": "ts-node scripts/run-schema.ts",
+    "db:image": "ts-node scripts/add_image_column.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
