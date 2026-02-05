@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../App.css";
+import ImageDrop from "./ImageDrop";
 
 const Categories = [
     { id: "surplus", label: "Surplus"},
@@ -26,7 +27,6 @@ export default function DashboardForm(){
     const [description, setDescription] = useState("");
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [image, setImage] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
     async function submitExpense() {
         if (!category || !amount || !date) return;
 
@@ -50,7 +50,6 @@ export default function DashboardForm(){
     setDate("");
     setDescription("");
     setImage(null);
-    setImagePreview(null);
   }
 
   async function fetchExpenses() {
@@ -63,6 +62,9 @@ export default function DashboardForm(){
     fetchExpenses();
   }, []);
 
+  function updateImage(image: File | null) {
+    setImage(image);
+  }
 return (
     <div className="dashboard-wrapper">
       {/* TOP ROW */}
@@ -123,8 +125,7 @@ return (
         {/* CENTER */}
         <main className="center">
           <div className="image-drop">
-            Drop Product Image or Receipt here
-            {imagePreview && <img src={imagePreview} alt="Preview" />}
+           <ImageDrop updateImage={updateImage}/>
           </div>
 
           <textarea

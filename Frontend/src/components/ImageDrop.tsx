@@ -2,19 +2,16 @@ import { useCallback, useState } from "react";
 import "../App.css";
 import { useDropzone } from "react-dropzone";
 
-export default function ImageDrop({ imagePreview }: { imagePreview: string | null }) {
+export default function ImageDrop({updateImage}: {updateImage: (image: File | null) => void}) {
+    const [uploads, setUploads] = useState<File[]>([]);
 
-
-
-    const [imageFile, setImageFile] = useState<File | null>(null);
-   
     const { getRootProps, getInputProps, isDragActive} = useDropzone({
-        onDrop: useCallback((file:any) => {
-            setImageFile(file);
+        onDrop: useCallback((images: File[]) => {
+            setUploads(images);
+            updateImage(uploads[0] ?? null);
         }, []),
     })  
-
-    const preview = imageFile ? URL.createObjectURL(imageFile) : null;
+   
     return (
         <div className="image-drop">
             <div {...getRootProps()} className="dropzone">
@@ -25,8 +22,9 @@ export default function ImageDrop({ imagePreview }: { imagePreview: string | nul
                 <p>Drag and drop some files here, or click to select files</p>
             )}
             </div>
-            Drop Product Image or Receipt here
-            {preview && <img src={preview} alt="Preview" />}
+            {uploads && uploads.length > 0 && (
+                <img src={URL.createObjectURL(uploads[0])} alt="Preview" />
+            )}
         </div>
     );
 }
