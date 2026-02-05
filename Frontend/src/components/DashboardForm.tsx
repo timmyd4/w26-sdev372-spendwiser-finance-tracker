@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import "../App.css";
-import ImageDrop from "./ImageDrop";
+import { useDropzone } from "react-dropzone";
 
 const Categories = [
     { id: "surplus", label: "Surplus"},
@@ -26,22 +26,21 @@ export default function DashboardForm(){
     const [date, setDate] = useState("");
     const [description, setDescription] = useState("");
     const [expenses, setExpenses] = useState<Expense[]>([]);
-    const [image, setImage] = useState<File | null>(null);
+    const [image, setImage] = useState<File[] | null>(null);
     async function submitExpense() {
         if (!category || !amount || !date) return;
+        const formData = new FormData();
+        formData.append("hobby", category);
+        formData.append("description", description);
+        formData.append("location", location);
+        formData.append("amount", amount);
+        formData.append("expense_date", date);
+        if (image) formData.append("image", image[0]);
 
         await fetch("http://localhost:3001/expenses", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                hobby: category,
-                description,
-                location,
-                amount,
-                image_path: image ? URL.createObjectURL(image) : null,
-                expense_date: date,
-            }),
-    });
+            body: formData,
+        });
 
     fetchExpenses();
 
@@ -62,9 +61,12 @@ export default function DashboardForm(){
     fetchExpenses();
   }, []);
 
-  function updateImage(image: File | null) {
-    setImage(image);
-  }
+  const { getRootProps, getInputProps, isDragActive} = useDropzone({
+      onDrop: useCallback((images: File[]) => {
+          setImage(images);
+      }, []),
+  })
+
 return (
     <div className="dashboard-wrapper">
       {/* TOP ROW */}
@@ -125,7 +127,17 @@ return (
         {/* CENTER */}
         <main className="center">
           <div className="image-drop">
-           <ImageDrop updateImage={updateImage}/>
+            <div {...getRootProps()} className="dropzone">
+                <input {...getInputProps()} />
+            {isDragActive ? (
+                <p>Drop the files here ...</p>
+            ) : (
+                <p>Drag and drop some files here, or click to select files</p>
+            )}
+            </div>
+            {image && image.length > 0 && (
+                <img src={URL.createObjectURL(image[0])} alt="Preview" />
+            )}
           </div>
 
           <textarea
