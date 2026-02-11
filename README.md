@@ -32,7 +32,7 @@
 ## Wireframe
 ![WireFrame-Picture](WireFrame.png)
 
-# MVP for Sprint 2 Deliverable
+# MVP for Sprint 2 Deliverable (Xavier & Jacob)
 
 - Add ability to upload images
     - may need to update table for db
@@ -41,3 +41,20 @@
 - Add description on side bar within finance history
     - may need to manipulate css
     - may need to add logic for appending data to div
+
+# MVP for Sprint 3 Deliverable (Tim & Jesse)
+
+- **Add more Category selections**: We can add stuff like *Car-Parts*, *Groceries*, *Computer-Hardware*, *Gaming-Mouses*, etc. 
+    - Update React backend and frontend to have different selections
+
+- **Fix up Finance History**: It looks good they added the Description, but it could still use more work. I wouldn't want a Client seeing this.
+    - Make the added history easier to read
+    - Make images be closer to the size they are
+    - Fix timeslot
+
+- **General CSS Work**: Wireframe is great, but lets start moving towards production and pretend as if this was going to be seen by a client. 
+    - Start to make the app fill the entire page, everything is kind of just shoved on there right now
+    - Center divs, enlarge buttons, fix overall format
+
+- **Use python pandas for Finance Goals?**: SDEV494 is currently teaching us Pandas, why not try and further that knowledge and use it on a real application.
+    - Use the df.plot(kind = "bar") or df.plot(kind = "scatter") possibly for adding a graph within the SPA
