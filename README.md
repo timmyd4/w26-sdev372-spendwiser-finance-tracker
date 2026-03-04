@@ -32,6 +32,13 @@
 ## Wireframe
 ![WireFrame-Picture](WireFrame.png)
 
+# Docker Deployment
+- Have docker installed & running
+- Run `docker compose up -d --build` at the root of the project
+- Docker will take over and build the two dockerfiles located in the frontend & backend
+- Frontend Port: `localhost:5173`
+- Backend Port: `localhost:3001` - `/api/health` - `/expenses`
+
 # MVP for Sprint 2 Deliverable (Xavier & Jacob)
 
 - Add ability to upload images
